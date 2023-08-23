@@ -16,6 +16,7 @@ module.exports = {
         '#809BBF': '#809BBF',  // navy blue
         '#F7F2ED': '#F7F2ED',  // background color
         '#E6EAEF': '#E6EAEF',  // light blue
+        '#BFC3C8': '#BFC3C8',  // gray
 
       }
     },

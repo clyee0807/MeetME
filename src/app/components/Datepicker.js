@@ -2,16 +2,23 @@
 import React, { useState, useEffect } from 'react';
 
 
-const DatePicker = () => {
+const DatePicker = (props) => {
+
+    // const selectedDates = props.selectedDates;
+    // const setSelectedDates = props.setSelectedDates;
 
     const daysCode = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
     const monthCode = ['', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
     
+    const realDate = new Date().getDate();  // 23
+    const realMonth = new Date().getMonth() + 1; // 8
+
     const [currYear, setCurrYear] = useState(new Date().getFullYear());
     const [currMonth, setCurrMonth] = useState(new Date().getMonth() + 1);
-    const [currDate, setCurrDate] = useState(new Date().getDate());
+    // const [realDate, setCurrDate] = useState(new Date().getDate());
 
     const [currTitle, setCurrTitle] = useState(getCalendarTitle(currMonth, currYear));
+
 
     useEffect(() => { // 當currMonth, currYear的值改變時會呼叫
         setCurrTitle(getCalendarTitle(currMonth, currYear));
@@ -39,12 +46,11 @@ const DatePicker = () => {
         return monthCode[month] + " " + year.toString();
     }
 
-    // console.log(currTitle);
 
-    function CalendarMonthView({year, month}) {
+    function CalendarMonthView({year, month, selectedDates, setSelectedDates}) {
+        // console.log(selectedDates);
+        // selectedDates.push('test2');
 
-        // const daysInMonth = new Date(2023, 8, 0).getDate();  // 31 days in Aug
-        // const firstDayOfWeek = new Date(2023, 8 - 1, 1).getDay(); // 0 for Sunday, 1 for Monday...
         const daysInMonth = new Date(year, month, 0).getDate();  // 31 days in Aug
         const firstDayOfWeek = new Date(year, month - 1, 1).getDay(); // 0 for Sunday, 1 for Monday...
 
@@ -71,9 +77,29 @@ const DatePicker = () => {
         calendarMatrix.push(currWeek);
         
 
-        console.log(firstDayOfWeek);
-        console.log(daysInMonth);
-        console.log(calendarMatrix);
+        function selectDates(day) {
+            if(hasSelectedDate(day)){
+                setSelectedDates(selectedDates.filter(selectedDate => selectedDate[1] !== day));
+            } else {
+                setSelectedDates([...selectedDates, [currMonth, day]]);
+            }
+            
+        }
+
+        // check if the date been selected
+        function hasSelectedDate(day) {
+            let selected = false;
+            selectedDates.map((d, didx) => {
+                if(d[0] === currMonth && d[1] === day){
+                    selected = true;
+                }
+            })
+            if(selected){
+                return true;
+            } else {
+                return false;
+            }
+        }
 
         return(
         <div className='calendar-view flex flex-col'>
@@ -86,9 +112,11 @@ const DatePicker = () => {
                 {calendarMatrix.map((week, weekidx) => (
                     <div key={weekidx} className='grid grid-cols-7 gap-1 my-1'>
                         {week.map((day, dayidx) => (
-                            <div day={dayidx} className=
-                                'calendar-date text-center border border-[#809BBF] cursor-pointer rounded-md hover:bg-[#E6EAEF]'
-                            >{day !== null ? day : ''}</div>
+                            ((day >= realDate && currMonth === realMonth) || currMonth > realMonth) ?
+                                ((hasSelectedDate(day)) ? 
+                                    <div day={dayidx} className='calendar-date text-center border border-[#809BBF] cursor-pointer rounded-md bg-[#809BBF]' onClick={() => selectDates(day)}>{day !== null ? day : ''}</div>
+                                : <div day={dayidx} className='calendar-date text-center border border-[#809BBF] cursor-pointer rounded-md hover:bg-[#E6EAEF]' onClick={() => selectDates(day)}>{day !== null ? day : ''}</div>)
+                            : <div day={dayidx} className='calendar-date text-center text-[#BFC3C8] border border-[#809BBF] rounded-md'>{day !== null ? day : ''}</div>
                         ))}
                     </div>
                 ))}
@@ -106,7 +134,7 @@ const DatePicker = () => {
                 <p className='mx-10'>{currTitle}</p>
                 <p onClick={nextMonth} className="select-none cursor-pointer">{'>'}</p>
             </div>
-            <CalendarMonthView year={currYear} month={currMonth}/>
+            <CalendarMonthView year={currYear} month={currMonth} selectedDates={props.selectedDates} setSelectedDates={props.setSelectedDates}/>
    
         </div>
     </>

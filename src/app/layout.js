@@ -13,7 +13,8 @@ export default function RootLayout({ children }) {
   // console.log(children);
   return (
     <html lang="en" suppressHydrationWarning={true}>
-      <body className={inter.className}>
+      {/* <body className={inter.className }> */}
+      <body className=' bg-[#F7F2ED]'>
         <Navbar/>
         {children}
         <Footer/>

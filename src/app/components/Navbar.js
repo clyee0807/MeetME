@@ -10,9 +10,8 @@ function classNames(...classes) {
 
 const Navbar = () => {
   return(
-  <>
 
-    <div className='w-full h-14 flex justify-center items-center px-8 bg-gray-300 fixed'>
+    <div className='w-full bg-[#E6EAEF] h-14 flex justify-center items-center '>
         <div className='text-xl font-bold flex items-center h-full'>
             <div className = "justify-center">
                 MeetME
@@ -20,8 +19,6 @@ const Navbar = () => {
         </div>
         
     </div>
-    <div className ='h-14'> </div>
-  </>
   );
 };
 
