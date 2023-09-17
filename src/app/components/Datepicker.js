@@ -83,8 +83,8 @@ const DatePicker = (props) => {
             } else {
                 setSelectedDates([...selectedDates, [currMonth, day]]);
             }
-            
         }
+        
 
         // check if the date been selected
         function hasSelectedDate(day) {

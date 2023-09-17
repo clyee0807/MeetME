@@ -18,6 +18,15 @@ module.exports = {
         '#E6EAEF': '#E6EAEF',  // light blue
         '#BFC3C8': '#BFC3C8',  // gray
 
+      },
+      gridTemplateRows: {
+        '8': 'repeat(8, minmax(0, 1fr))', // Simple 8 row grid
+        '12': 'repeat(12, minmax(0, 1fr))', 
+      },
+      minHeight: {
+        '300px': '300',
+        '500px': '500',
+        '1/2': '50%'
       }
     },
   },
