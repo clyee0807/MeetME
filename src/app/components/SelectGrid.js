@@ -1,24 +1,45 @@
 "use client";
 import React, { useState, useEffect } from 'react';
 
-
-// const eventData = {
-//     title: "cLyee's Event",
-//     selectedDates: ['2023/08/25', '2023/08/26', '2023/08/27', '2023/08/28'],
-//     selectedTimes: ['00:00', '01:00', '03:00', '04:00', '05:00', '11:00', '12:00', '13:00', '14:00', '15:00']
-// };
-// "title": "cLyee's Event",
-// "selectedDates": ["2023/08/25", "2023/08/26", "2023/08/27", "2023/08/28"],
-// "selectedTimes": ["00:00", "01:00", "03:00", "04:00", "05:00", "11:00", "12:00", "13:00", "14:00", "15:00"],
-
 const daysCode = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
 
 const SelectGrid = (props) => {
     
-    const eventData = props.EventData;
-    const selectedTimes = props.selectedTimes; //
-    const setSelectedTimes = props.setSelectedTimes;
+    // const eventDesc = props.EventDesc;
+    // console.log(eventDesc);
+
+    const eventDesc = {
+        title: '09182211',
+        availableDates: [
+            '2023/09/17',
+            '2023/09/26',
+            '2023/09/19',
+            '2023/09/20',
+            '2023/09/21',
+            '2023/09/22',
+            '2023/09/23',
+            '2023/09/24',
+            '2023/09/25'
+        ],
+        availableTimes: [
+            '02:00', '03:00',
+            '00:00', '01:00',
+            '04:00', '05:00',
+            '06:00', '07:00',
+            '08:00'
+        ]
+    };
+    const availableDates = eventDesc.availableDates.sort(); 
+    const availableTimes = eventDesc.availableTimes.sort();
+    
+
+
+	const [name, setName] = useState("");
+	const [picks, setPicks] = useState([]);
+
+    // console.log("sort dates: ", availableDates);
+    // console.log("sort times: ", availableTimes);
 
     function getWeekDay(date) {
         const dateobj = new Date(date);
@@ -26,36 +47,46 @@ const SelectGrid = (props) => {
         return daysCode[dayNum];
     }
 
-    function selectTimes(time) {
-        if(selectedTimes.includes(time)){
-            setSelectedTimes(selectedTimes.filter(selectedTime => selectedTime !== time));
+    function dateFormat(dateidx, timeidx) {
+        const date = availableDates[dateidx].toString();
+        const time = availableTimes[timeidx].toString();
+        return date+" "+time;
+    }
+
+    function selectTimes(dateidx, timeidx) {
+        // console.log("dateidx: ", dateidx);
+        // console.log("timeidx: ", timeidx);
+
+        const fulltime = dateFormat(dateidx, timeidx);
+
+        if(picks.includes(fulltime)){
+            setPicks(picks.filter(picks => picks !== fulltime));
         } else {
-            setSelectedTimes([...selectedTimes, time]);
+            setPicks([...picks, fulltime]);
         }
     }
 
     return(
     
-    <div className='w-64 overflow-scroll justify-center items-center px-8 py-5 my-10 rounded-lg bg-white'>
+    <div className='w-80 overflow-scroll justify-center items-center px-8 py-5 my-10 rounded-lg bg-white'>
         <div className='flex flex-rows'>
-            {eventData.selectedDates.map((date, dateidx) => (
+            {availableDates.map((date, dateidx) => (
                 <div>
                     <div className="event-date px-2">{date}</div>
                     <div className='text-center'>{getWeekDay(date)}</div>
                     <div className="time-col grid grid-rows-12 grid-flow-col">
-                        {eventData.selectedTimes.map((time, timeidx) => (
-                            selectedTimes.includes(time) ?
+                        {availableTimes.map((time, timeidx) => (
+                            picks.includes(dateFormat(dateidx, timeidx)) ?
                             <div className='text-center py-1 m-1 border border-[#809BBF] bg-[#809BBF] cursor-pointer rounded-sm'
-                                onClick={() => selectTimes(time)}>{time}</div>
+                                onClick={() => selectTimes(dateidx, timeidx)}>{time}</div>
                             :<div className='text-center py-1 m-1 border border-[#809BBF] cursor-pointer rounded-lg hover:bg-[#E6EAEF]'
-                                onClick={() => selectTimes(time)}>{time}</div>
+                                onClick={() => selectTimes(dateidx, timeidx)}>{time}</div>
                         ))}
                     </div>
                 </div>
             ))}
             
         </div>
-
     </div>
     
     );

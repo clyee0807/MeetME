@@ -22,7 +22,13 @@ const Home = () => {
 		}
 	}, [title, selectedDates, selectedTimes]);
 
+	function dateFormat(dateArray) {
+		const [year, month, day] = dateArray;
+	    const formattedDate = `${year}/${String(month).padStart(2, '0')}/${String(day).padStart(2, '0')}`;
 
+    	return formattedDate;
+
+	}
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
@@ -30,6 +36,9 @@ const Home = () => {
 		console.log(title);
 		console.log(selectedDates);
 		console.log(selectedTimes);
+
+		// const formattedDates = dateFormatAndSort(selectedDates);
+		// console.log(formattedDates);
 
 		try {
 			const res = await fetch('/api/event', {
@@ -46,7 +55,8 @@ const Home = () => {
 					], 
 					desc: {
 						title,
-						availableDates: selectedDates.map((date) => date.toString()),
+						availableDates: selectedDates.map((date) => dateFormat(date)),
+						// availableDates: selectedDates.map((date) => date.toString()),
 						availableTimes: selectedTimes.map((time) => time.toString()),
 					},
 				}),

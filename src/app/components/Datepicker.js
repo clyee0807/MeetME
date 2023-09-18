@@ -12,6 +12,7 @@ const DatePicker = (props) => {
     
     const realDate = new Date().getDate();  // 23
     const realMonth = new Date().getMonth() + 1; // 8
+    const realYear = new Date().getFullYear(); // 2023
 
     const [currYear, setCurrYear] = useState(new Date().getFullYear());
     const [currMonth, setCurrMonth] = useState(new Date().getMonth() + 1);
@@ -48,8 +49,6 @@ const DatePicker = (props) => {
 
 
     function CalendarMonthView({year, month, selectedDates, setSelectedDates}) {
-        // console.log(selectedDates);
-        // selectedDates.push('test2');
 
         const daysInMonth = new Date(year, month, 0).getDate();  // 31 days in Aug
         const firstDayOfWeek = new Date(year, month - 1, 1).getDay(); // 0 for Sunday, 1 for Monday...
@@ -79,9 +78,11 @@ const DatePicker = (props) => {
 
         function selectDates(day) {
             if(hasSelectedDate(day)){
-                setSelectedDates(selectedDates.filter(selectedDate => selectedDate[1] !== day));
+                setSelectedDates(selectedDates.filter(selectedDate => selectedDate[2] !== day));
             } else {
-                setSelectedDates([...selectedDates, [currMonth, day]]);
+                const date = [currYear, currMonth, day];
+                // console.log("date: ", date);
+                setSelectedDates([...selectedDates, date]);
             }
         }
         
@@ -90,7 +91,7 @@ const DatePicker = (props) => {
         function hasSelectedDate(day) {
             let selected = false;
             selectedDates.map((d, didx) => {
-                if(d[0] === currMonth && d[1] === day){
+                if(d[1] === currMonth && d[2] === day){
                     selected = true;
                 }
             })
@@ -112,7 +113,7 @@ const DatePicker = (props) => {
                 {calendarMatrix.map((week, weekidx) => (
                     <div key={weekidx} className='grid grid-cols-7 gap-1 my-1'>
                         {week.map((day, dayidx) => (
-                            ((day >= realDate && currMonth === realMonth) || currMonth > realMonth) ?
+                            ((day >= realDate && currMonth === realMonth) || currMonth > realMonth || currYear > realYear) ?
                                 ((hasSelectedDate(day)) ? 
                                     <div day={dayidx} className='calendar-date text-center border border-[#809BBF] cursor-pointer rounded-md bg-[#809BBF]' onClick={() => selectDates(day)}>{day !== null ? day : ''}</div>
                                 : <div day={dayidx} className='calendar-date text-center border border-[#809BBF] cursor-pointer rounded-md hover:bg-[#E6EAEF]' onClick={() => selectDates(day)}>{day !== null ? day : ''}</div>)

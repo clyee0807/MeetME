@@ -18,20 +18,3 @@ const Event = mongoose.models.Event || mongoose.model("Event", eventSchema);
 
 export default Event;
 
-
-
-// {
-//     result: [
-
-//         {
-//             name: "",
-//             picks: [],
-//         },
-//     ],
-//     desc: [
-//         title: "name",
-//         availableDates: ["2023/08/25", "2023/08/26"],
-//         availableTimes: ["01:00", "02:00"],
-    
-//     ],   
-// }
