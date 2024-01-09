@@ -6,33 +6,10 @@ const daysCode = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
 const SelectGrid = (props) => {
     
-    // const eventDesc = props.EventDesc;
-    // console.log(eventDesc);
+    // console.log("props: ", props);
 
-    const eventDesc = {
-        title: '09182211',
-        availableDates: [
-            '2023/09/17',
-            '2023/09/26',
-            '2023/09/19',
-            '2023/09/20',
-            '2023/09/21',
-            '2023/09/22',
-            '2023/09/23',
-            '2023/09/24',
-            '2023/09/25'
-        ],
-        availableTimes: [
-            '02:00', '03:00',
-            '00:00', '01:00',
-            '04:00', '05:00',
-            '06:00', '07:00',
-            '08:00'
-        ]
-    };
-    const availableDates = eventDesc.availableDates.sort(); 
-    const availableTimes = eventDesc.availableTimes.sort();
-    
+    const availableDates = props.EventDesc.availableDates.sort();
+    const availableTimes = props.EventDesc.availableTimes.sort();    
 
 
 	const [name, setName] = useState("");

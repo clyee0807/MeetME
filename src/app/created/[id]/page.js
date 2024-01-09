@@ -21,11 +21,13 @@ const getEventById = async(id) => {
 };
 
 export default async function Join({params}) {
+  // console.log("params: ", params);
   const {id} = params;
   // console.log("id: ", id);
 
   const {event} = await getEventById(id);
   const {result, desc} = event;
+  // console.log("event: ", event);
 
   // const {title, selectedDates, selectedTimes} = event;
   // const [selectedTimes, setSelectedTimes] = useState([]);
@@ -46,7 +48,7 @@ export default async function Join({params}) {
         </div>
         <div className="other-time my-10 bg-white">
           <p className="text-center">Other's Time:</p>
-          {/* <ResultGrid EventData={desc}/> */}
+          <ResultGrid EventData={event}/>
         </div>
       </div>
     </div>

@@ -64,7 +64,7 @@ const Home = () => {
 			
 			if (res.ok) {
 				const data = await res.json(); // 從route.js接回來的
-				// console.log(data);
+				console.log("data from route.js: ", data);
 				router.push('/created/' + data._id);
 			} else {
 				throw new Error("Failed to create new event.");
