@@ -3,6 +3,7 @@ import Event from "@/app/models/event";
 import mongoose from "mongoose";
 import { NextResponse } from "next/server";
 
+// 新增一個event
 export async function POST(req) {
     const {result, desc} = await req.json();
     console.log("result: ", result);
@@ -33,7 +34,7 @@ export async function POST(req) {
 
 }
 
-
+// return所有event
 export async function GET() {
     await connectDB();
     const events = await Event.find();

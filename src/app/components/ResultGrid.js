@@ -53,20 +53,16 @@ const test_result = [
 
 const ResultGrid = (props) => {
     // console.log("props: ", props);
+    
+    
+    const result = props.EventData.result;
     const eventInfo = props.EventData.desc;
-    const attendlist = props.EventData.result;
+    const availableDates = eventInfo.availableDates.sort();
+    const availableTimes = eventInfo.availableTimes.sort();   
+    // const availableDates = test_eventDesc.availableDates.sort(); 
+    // const availableTimes = test_eventDesc.availableTimes.sort();
+    // const result = test_result;
 
-    // console.log("eventData: ", eventInfo);
-    // console.log("attendlist: ", attendlist);
-  
-    // const availableDates = eventInfo.availableDates.sort();
-    // const availableTimes = eventInfo.availableTimes.sort();   
-    const availableDates = test_eventDesc.availableDates.sort(); 
-    const availableTimes = test_eventDesc.availableTimes.sort();
-    const result = test_result;
-
-
-	const [picks, setPicks] = useState([]);
 
     function getWeekDay(date) {
         const dateobj = new Date(date);
@@ -97,7 +93,7 @@ const ResultGrid = (props) => {
         return countMap;
     }
     const attendeeCounts = countAttendee(result);
-    console.log("attendeeCounts: ", attendeeCounts);
+    //console.log("attendeeCounts: ", attendeeCounts);
 
 
     return(
