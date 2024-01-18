@@ -1,6 +1,7 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import { useRouter } from "next/router";
+// import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import SelectGrid from "../../components/SelectGrid";
 import ResultGrid from "../../components/ResultGrid";
 
@@ -22,6 +23,7 @@ const getEventById = async(id) => {
 };
 
 export default function Join({params}) {
+	const router = useRouter();
 
 	const [event, setEvent] = useState(null);
 	const [userName, setUserName] = useState("???");
@@ -73,6 +75,9 @@ export default function Join({params}) {
 
 			if (res.ok) {
 				const data = await res.json();
+				console.log("Success to push: ", data)
+				// console.log("id = ", id);
+				router.push(`/${id}`);
 			} else {
 				throw new Error("Failed to update event.");
 			}

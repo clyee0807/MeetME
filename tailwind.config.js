@@ -22,6 +22,7 @@ module.exports = {
       gridTemplateRows: {
         '8': 'repeat(8, minmax(0, 1fr))', // Simple 8 row grid
         '12': 'repeat(12, minmax(0, 1fr))', 
+        '24': 'repeat(24, minmax(0, 1fr))', 
       },
       minHeight: {
         '300px': '300',
