@@ -4,16 +4,18 @@ import React, { useState, useEffect } from 'react';
 const daysCode = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
 
-const SelectGrid = (props) => {
+const SelectGrid = ({EventDesc, picks, onPicksChange}) => {
     
     // console.log("props: ", props);
 
-    const availableDates = props.EventDesc.availableDates.sort();
-    const availableTimes = props.EventDesc.availableTimes.sort();    
+    const availableDates = EventDesc.availableDates.sort();
+    const availableTimes = EventDesc.availableTimes.sort();    
+
+    // let picks = picks;
 
 
-	const [name, setName] = useState("");
-	const [picks, setPicks] = useState([]);
+	// const [name, setName] = useState("");
+	// const [picks, setPicks] = useState([]);
 
     // console.log("sort dates: ", availableDates);
     // console.log("sort times: ", availableTimes);
@@ -37,9 +39,13 @@ const SelectGrid = (props) => {
         const fulltime = dateFormat(dateidx, timeidx);
 
         if(picks.includes(fulltime)){
-            setPicks(picks.filter(picks => picks !== fulltime));
+            // setPicks(picks.filter(picks => picks !== fulltime));
+            const newPicks = picks.filter(picks => picks !== fulltime);
+            onPicksChange(newPicks);
         } else {
-            setPicks([...picks, fulltime]);
+            // setPicks([...picks, fulltime]);
+            const newPicks = [...picks, fulltime];
+            onPicksChange(newPicks);
         }
     }
 

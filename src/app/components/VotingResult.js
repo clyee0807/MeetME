@@ -51,7 +51,7 @@ const test_result = [
     }
 ]
 
-const ResultGrid = (props) => {
+const VotingResult = (props) => {
     // console.log("props: ", props);
     
     
@@ -97,13 +97,13 @@ const ResultGrid = (props) => {
 
 
     return(
-    <div className='w-80 overflow-scroll justify-center items-center px-8 py-5 my-10 rounded-lg bg-white'>
-        <div className='flex flex-rows'>
+    <div className='justify-center items-center px-8 py-5 my-10 rounded-lg bg-white'>
+        <div className='flex flex-rows justify-center px-20'>
             {availableDates.map((date, dateidx) => (
-                <div key={date}>
+                <div className="mx-2" key={date}>
                     <div className="event-date px-2">{date}</div>
                     <div className='text-center'>{getWeekDay(date)}</div>
-                    <div className="time-col grid grid-rows-12 grid-flow-col">
+                    <div className="time-col grid grid-rows-24 grid-flow-col">
                         {availableTimes.map((time, timeidx) => {
                             const count = attendeeCounts.get(dateFormat(dateidx, timeidx)) || 0;
                             let bgColor = 'bg-white';
@@ -130,4 +130,4 @@ const ResultGrid = (props) => {
     );
 };
 
-export default ResultGrid;
+export default VotingResult;
