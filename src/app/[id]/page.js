@@ -51,14 +51,16 @@ export default function Result({params}) {
 
   return (
     
-    <div className="">
+    <div className="mx-auto my-10 mx-8 p-3">
+	<h1 className="text-7xl font-semibold font-jura">MeetME</h1>
+
 	{/* Event Name */}
 	<div className='flex flex-col justify-center items-center'>
-		<p className="text-2xl font-bold mb-2 mt-10">{desc.title}</p>
+		<p className="text-2xl font-bold mb-1 mt-8 font-jura">{desc.title}</p>
+		<p className="font-jura">Great! The voting result is...</p>
 	</div>
 
-	<div className="other-time my-10 bg-white">
-		<p className="text-center">Great! The voting result is:</p>
+	<div className="other-time my-10 bg-white rounded-lg">
 		{/* <ResultGrid EventData={event}/> */}
 		<VotingResult EventData={event}/>
 	</div>

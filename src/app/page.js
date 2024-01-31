@@ -64,7 +64,7 @@ const Home = () => {
 			
 			if (res.ok) {
 				const data = await res.json(); // 從route.js接回來的
-				console.log("data from route.js: ", data);
+				// console.log("data from route.js: ", data);
 				router.push('/created/' + data._id);
 			} else {
 				throw new Error("Failed to create new event.");
@@ -78,38 +78,46 @@ const Home = () => {
 	}
 
 	return (
-		<div className="">
-			{/* Event Name */}
-			<div className='flex flex-col justify-center items-center'>
-			<p className="text-2xl font-bold mb-2 mt-10">Event Name:</p>
-			<input 
-				className="border rounded p-1 h-8" 
-				type="text"
-				value={title}
-				onChange={(e) => {setTitle(e.target.value)}}
-				/>
+		<div className="mx-auto my-10 mx-8 p-3">
+			<div className="flex flex-row items-end mb-3">
+				<h1 className="text-7xl font-semibold font-jura">MeetME</h1>
+				<p className="text-2xl text-center ml-3 font-jura">Simplifying Event Scheduling and Social Planning</p>
+			</div>
+			<p className=" mb-20 font-jura">In today's fast-paced world, coordinating schedules and organizing events with friends and colleagues can often be challenging. This is where "meetME" steps in – a website designed to streamline the process of event planning and scheduling. meetME is not just a tool; it's a social enabler, making it easier than ever to connect with others and create memorable experiences.</p>
+
+			<div className="flex flex-row">
+				<div className="left-col flex flex-col px-4 pt-10 pb-20 items-center bg-white rounded-2xl w-1/3 mr-2">
+					{/* Event Name */}
+					<p className="text-2xl font-bold mb-2 font-jura">Event Name:</p>
+					<input 
+						className="border rounded p-1 h-6 w-3/4" 
+						type="text"
+						value={title}
+						onChange={(e) => {setTitle(e.target.value)}}
+					/>
+					
+					{/* Available Dates */}
+					<p className="text-2xl font-bold font-jura mt-10 mb-5">Available Dates:</p>
+					<DatePicker selectedDates={selectedDates} setSelectedDates={setSelectedDates}/>  
+					
+				</div>
+				
+
+				{/* Available Times */}
+				<div className='right-col flex flex-col px-4 py-10 pb-20 items-center bg-white w-2/3 rounded-2xl ml-2'>
+					<p className="text-2xl font-bold font-jura mb-10">Available Times:</p>
+					<TimePicker selectedTimes={selectedTimes} setSelectedTimes={setSelectedTimes}/>
+				</div>
 			</div>
 
-			{/* Available Dates */}
-			<div className='flex flex-col justify-center items-center mt-10'>
-			<p className="text-2xl font-bold">Available Dates:</p>
-			<DatePicker selectedDates={selectedDates} setSelectedDates={setSelectedDates}/>  
-			</div>
-			
-
-			{/* Available Times */}
-			<div className='flex flex-col justify-center items-center mt-10'>
-			<p className="text-2xl font-bold">Available Times:</p>
-			<TimePicker selectedTimes={selectedTimes} setSelectedTimes={setSelectedTimes}/>
-			</div>
 
 			{/* Submit */}
-			<div className="flex p-6 justify-center items-center">
+			<div className="flex mt-10 p-6 justify-center items-center">
 			<button
 				type="submit"
 				disabled={isCreating}
 				onClick={handleSubmit}
-				className="items-center px-4 py-2 rounded-lg flex z-50 shadow-lg">
+				className="items-center px-14 py-5 rounded-lg flex z-50 shadow-lg bg-[#E6EAEF]">
 				<p>SUBMIT</p>
 			</button> 
 			{/* <Link href="/created">created page</Link> */}

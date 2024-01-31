@@ -97,12 +97,12 @@ const VotingResult = (props) => {
 
 
     return(
-    <div className='justify-center items-center px-8 py-5 my-10 rounded-lg bg-white'>
-        <div className='flex flex-rows justify-center px-20'>
+    <div className='items-center px-8 py-10 my-10 rounded-lg bg-white'>
+        <div className='flex flex-rows justify-between px-20'>
             {availableDates.map((date, dateidx) => (
                 <div className="mx-2" key={date}>
-                    <div className="event-date px-2">{date}</div>
-                    <div className='text-center'>{getWeekDay(date)}</div>
+                    <div className="text-center font-jura">{date}</div>
+                    <div className='text-center font-jura mb-3'>{getWeekDay(date)}</div>
                     <div className="time-col grid grid-rows-24 grid-flow-col">
                         {availableTimes.map((time, timeidx) => {
                             const count = attendeeCounts.get(dateFormat(dateidx, timeidx)) || 0;
@@ -115,7 +115,7 @@ const VotingResult = (props) => {
                                 bgColor = 'bg-blue';
                             }
                             return (
-                                <div key={time} className={`text-center py-1 m-1 border border-[#809BBF] rounded-lg ${bgColor}`}>
+                                <div key={time} className={`px-8 py-2 text-center py-1 m-1 border border-[#809BBF] rounded-lg ${bgColor}`}>
                                     {time}
                                 </div>
                             );

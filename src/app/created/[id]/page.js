@@ -86,51 +86,74 @@ export default function Join({params}) {
 		}
 	}
 
+	// const [isCopied, setIsCopied] = useState(false);
+	const copyToClipboard = async () => {
+		try {
+			await navigator.clipboard.writeText(window.location.href);
+			// setIsCopied(true);
+			// setTimeout(() => setIsCopied(false), 1000);
+			alert('Event URL has been copied!');
+		} catch (err) {
+			console.error('Failed to copy URL: ', err);
+		}
+	};
   
-  
-  if (!event) {
-    return <div>Loading...</div>;
-  }
+	if (!event) {
+		return <div className="h-auto">Loading...</div>;
+	}
 
-  const { result, desc } = event;
+	const { result, desc } = event;
 
   return (
     
-    <div className="">
+    <div className="mx-auto my-10 mx-8 p-3">
+	<h1 className="text-7xl font-semibold font-jura">MeetME</h1>
+
 	{/* Event Name */}
 	<div className='flex flex-col justify-center items-center'>
-		<p className="text-2xl font-bold mb-2 mt-10">{desc.title}</p>
+		<div className="flex flex-row mb-1 mt-8 ">		
+			<p className="text-2xl font-boldfont-jura">{desc.title}</p>
+			<button onClick={copyToClipboard} aria-label="Copy URL" className="ml-2 pt-1">
+				<svg xmlns="http://www.w3.org/2000/svg" width="16" height=" 16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="feather feather-copy">
+					<rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+					<path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h11a2 2 0 0 1 2 2v1"></path>
+				</svg>
+			</button>
+		</div>
+		<p className="font-jura">Congratulations! You have join the event</p>
 	</div>
 
 	{/* User Name */}
 	<div className='flex flex-col justify-center items-center'>
-		<p className="text-2xl font-bold mb-2 mt-10">My Name:</p>
+		<p className="text-2xl font-bold mb-2 mt-10 font-jura">Enter Your Name:</p>
 		<input 
-			className="border rounded p-1 h-8" 
+			className="border rounded p-1 h-6" 
 			type="text"
 			value={userName}
 			onChange={(e) => {setUserName(e.target.value)}}
 		/>
 	</div>
 
+	
 	{/* Selected Time */}
-	<div className="selected-time flex flex-row justify-center items-center gap-5">
-		<div className="my-time my-10 bg-white">
-			<p className="text-center">My Time:</p>   {/* 這裡更新使用者選擇的時間在picks */}
+	<div className="selected-time flex flex-row gap-5 mt-10">
+		<div className="my-time my-10 px-4 pt-10 pb-20 bg-white w-1/2 rounded-lg">
+			<p className="font-bold text-xl text-center font-jura">Your Time:</p>   {/* 這裡更新使用者選擇的時間在picks */}
 			<SelectGrid EventDesc={desc} picks={picks} onPicksChange={handlePicksChange}/>  
 		</div>
-		<div className="other-time my-10 bg-white">
-			<p className="text-center">Other's Time:</p>
+		<div className="other-time my-10 px-4 pt-10 pb-20 bg-white w-1/2 rounded-lg">
+			<p className="font-bold text-xl text-center font-jura">Other's Time:</p>
 			<ResultGrid EventData={event}/>
 		</div>
 	</div>
+
 
 	{/* Submit */}
 	<div className="flex p-6 justify-center items-center">
 		<button
 			type="submit"
 			onClick={handleSubmit} 
-			className="items-center px-4 py-2 rounded-lg flex z-50 shadow-lg">
+			className="items-center px-14 py-5 rounded-lg flex z-50 shadow-lg bg-[#E6EAEF]">
 			<p>SUBMIT</p>
 		</button> 
 		</div>

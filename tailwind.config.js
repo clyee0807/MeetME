@@ -28,6 +28,9 @@ module.exports = {
         '300px': '300',
         '500px': '500',
         '1/2': '50%'
+      },
+      fontFamily: {
+        jura: ['Jura', 'ui-serif'],
       }
     },
   },

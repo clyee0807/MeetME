@@ -86,7 +86,6 @@ const DatePicker = (props) => {
             }
         }
         
-
         // check if the date been selected
         function hasSelectedDate(day) {
             let selected = false;
@@ -104,20 +103,21 @@ const DatePicker = (props) => {
 
         return(
         <div className='calendar-view flex flex-col'>
-            <div className='calendar-days flex flex-row'>
+            <div className='calendar-days flex flex-row justify-between px-3'>
                 {daysCode.map(day => (  // weekdays
-                    <div key={day} className='calendar-eachday mx-2'>{day}</div>
-                    ))}
+                    <div key={day} className='calendar-eachday font-jura'>{day}</div>
+                ))}
             </div>
+            <hr/>
             <div className='calendar-dates'>
                 {calendarMatrix.map((week, weekidx) => (
-                    <div key={weekidx} className='grid grid-cols-7 gap-1 my-1'>
+                    <div key={weekidx} className='grid grid-cols-7 gap-2 my-2'>
                         {week.map((day, dayidx) => (
                             ((day >= realDate && currMonth === realMonth) || currMonth > realMonth || currYear > realYear) ?
                                 ((hasSelectedDate(day)) ? 
-                                    <div day={dayidx} className='calendar-date text-center border border-[#809BBF] cursor-pointer rounded-md bg-[#809BBF]' onClick={() => selectDates(day)}>{day !== null ? day : ''}</div>
-                                : <div day={dayidx} className='calendar-date text-center border border-[#809BBF] cursor-pointer rounded-md hover:bg-[#E6EAEF]' onClick={() => selectDates(day)}>{day !== null ? day : ''}</div>)
-                            : <div day={dayidx} className='calendar-date text-center text-[#BFC3C8] border border-[#809BBF] rounded-md'>{day !== null ? day : ''}</div>
+                                    <div day={dayidx} className='calendar-date py-1/2 px-3 text-center border border-[#809BBF] cursor-pointer rounded-md bg-[#809BBF]' onClick={() => selectDates(day)}>{day !== null ? day : ''}</div>
+                                : <div day={dayidx} className='calendar-date py-1/2 px-3 text-center border border-[#809BBF] cursor-pointer rounded-md hover:bg-[#E6EAEF]' onClick={() => selectDates(day)}>{day !== null ? day : ''}</div>)
+                            : <div day={dayidx} className='calendar-date py-1/2 px-3 text-center text-[#BFC3C8] border border-[#809BBF] rounded-md'>{day !== null ? day : ''}</div>
                         ))}
                     </div>
                 ))}
@@ -126,13 +126,13 @@ const DatePicker = (props) => {
         );
     }
 
+
     return(
     <>
-
-        <div className='justify-center items-center px-8  py-5 my-10 bg-white rounded-lg'>
-            <div className="calendar-title flex flex-row justify-center items-center">
+        <div className='justify-center items-center'>
+            <div className="calendar-title flex flex-row justify-between items-center pb-4">
                 <p onClick={prevMonth} className="select-none cursor-pointer">{'<'}</p>
-                <p className='mx-10'>{currTitle}</p>
+                <p className='mx-10 font-jura'>{currTitle}</p>
                 <p onClick={nextMonth} className="select-none cursor-pointer">{'>'}</p>
             </div>
             <CalendarMonthView year={currYear} month={currMonth} selectedDates={props.selectedDates} setSelectedDates={props.setSelectedDates}/>
