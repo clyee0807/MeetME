@@ -8,9 +8,15 @@ export async function POST(req) {
     const {result, desc} = await req.json();
     console.log("result: ", result);
     console.log("desc: ", desc);
-
+    
     try {
         await connectDB();
+        console.log("Database connected!");
+    } catch (error) {
+        console.log("Failed to connect to database.");
+    }
+
+    try {
 
         const newEvent = await Event.create({result, desc});
 
@@ -31,7 +37,6 @@ export async function POST(req) {
             return NextResponse.json({msg: ["Unable to send message."]});
         }
     }
-
 }
 
 // return所有event

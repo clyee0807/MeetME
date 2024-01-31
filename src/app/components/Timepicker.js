@@ -35,16 +35,16 @@ const TimePicker = (props) => {
 
     return(
     <>
-        <div className='justify-center items-center px-8 py-5 my-10 rounded-lg bg-white'>
-            <div className='timepicker grid grid-rows-12 grid-flow-col gap-1 my-1'>
+        <div className=''>
+            <div className='timepicker grid grid-rows-6 grid-flow-col gap-3'>
                 {timeCode.map((time, timeidx) => (
                     hasSelectedTime(time) ? 
                     <div time={timeidx} className=
-                        'time text-center px-3 py-1 border border-[#809BBF] bg-[#809BBF] cursor-pointer rounded-sm'
+                        'time text-center px-10 py-2 mr-3 border border-[#809BBF] bg-[#809BBF] cursor-pointer rounded-lg'
                         onClick={() => selectTimes(time)}
                     >{time}</div> :
                     <div time={timeidx} className=
-                        'time text-center px-3 py-1 border border-[#809BBF] cursor-pointer rounded-sm hover:bg-[#E6EAEF]'
+                        'time text-center px-10 py-2 mr-3 border border-[#809BBF] cursor-pointer rounded-lg hover:bg-[#E6EAEF]'
                         onClick={() => selectTimes(time)}
                     >{time}</div>
                 ))}

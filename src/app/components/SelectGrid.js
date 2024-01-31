@@ -51,16 +51,16 @@ const SelectGrid = ({EventDesc, picks, onPicksChange}) => {
 
     return(
     
-    <div className='w-80 overflow-scroll justify-center items-center px-8 py-5 my-10 rounded-lg bg-white'>
-        <div className='flex flex-rows'>
+    <div className='justify-center items-center px-8 py-5 my-10 rounded-lg bg-white'>
+        <div className='flex flex-rows overflow-x-auto'>
             {availableDates.map((date, dateidx) => (
                 <div>
-                    <div className="event-date px-2">{date}</div>
-                    <div className='text-center'>{getWeekDay(date)}</div>
+                    <div className="event-date px-2 font-jura">{date}</div>
+                    <div className='text-center font-jura'>{getWeekDay(date)}</div>
                     <div className="time-col grid grid-rows-12 grid-flow-col">
                         {availableTimes.map((time, timeidx) => (
                             picks.includes(dateFormat(dateidx, timeidx)) ?
-                            <div className='text-center py-1 m-1 border border-[#809BBF] bg-[#809BBF] cursor-pointer rounded-sm'
+                            <div className='text-center py-1 m-1 border border-[#809BBF] bg-[#809BBF] cursor-pointer rounded-lg'
                                 onClick={() => selectTimes(dateidx, timeidx)}>{time}</div>
                             :<div className='text-center py-1 m-1 border border-[#809BBF] cursor-pointer rounded-lg hover:bg-[#E6EAEF]'
                                 onClick={() => selectTimes(dateidx, timeidx)}>{time}</div>

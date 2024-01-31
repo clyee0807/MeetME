@@ -6,7 +6,7 @@ export default function Footer() {
 	return (
 		<footer className="bg-slate-50 bg-white w-full ">
 			<div className="grid place-items-center p-10">
-                <span className="text-info">Copyright © cLyee. All rights reserved</span>
+                <span className="text-info font-jura">Copyright © cLyee. All rights reserved</span>
             </div>
 		</footer>
 	);
